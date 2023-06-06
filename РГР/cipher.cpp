@@ -13,23 +13,6 @@
 #include "polybius.h"
 using namespace std;
 
-void checkfiles() {
-    while (true) {
-        std::vector<std::string> files = { "atb.obj", "cipher.obj", "gro.obj", "input.txt", "main.obj", "MDTFCipher.ilk", "MDTFCipher.pdb", "output.txt", "password.obj", "password.txt", "rsa.obj", "vc143.idb", "vc143.pdb", "skitala.obj", "vigener.obj", "polybius.obj"};
-        for (const auto& file : files) {
-            std::ifstream checkFile(file);
-            if (!checkFile.good()) {
-                cout << "File '" << file << "' does NOT exist." << endl;
-                checkFile.close();
-                cout << "Exit the programme after 5 seconds" << endl;
-                this_thread::sleep_for(chrono::milliseconds(5000));
-                exit(EXIT_FAILURE);
-            }
-        }
-        this_thread::sleep_for(chrono::milliseconds(100));
-    }
-}
-
 bool fileDifferent(string inputFileName, string outputFileName) {
     return (inputFileName == outputFileName);
 }

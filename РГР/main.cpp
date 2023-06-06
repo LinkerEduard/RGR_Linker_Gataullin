@@ -2,14 +2,12 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <thread>
 #include <windows.h>
 #include "cipher.h"
 #include "password.h"
 using namespace std;
 int main()
 {
-    thread t(checkfiles);
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     string pas, password, key;
@@ -194,6 +192,5 @@ int main()
         }
     }
     cout << "Exiting program";
-    t.detach();
     return 0;
 }

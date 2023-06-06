@@ -11,7 +11,7 @@ const char TABLE[99][99] = { {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
                            {'ã', 'ä', 'å', '¸', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì'},
                            {'í', 'î', 'ï', 'ğ', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', '÷'},
                            {'ø', 'ù', 'ú', 'û', 'ü', 'ı', 'ş', 'ÿ', '0', '1', '2'},
-                           {'3', '4', '5', '6', '7', '8', '9', ' '}};
+                           {'3', '4', '5', '6', '7', '8', '9', ' '} };
 
 void findPosition(char letter, int& row, int& col)
 {
@@ -39,13 +39,13 @@ void polybius_encrypt(string inputFileFileName, string outputFileFileName)
                 if ((row >= 10) && (col >= 10)) {
                     outputFile << row << col;
                 }
-                else if ((row >= 10) && (col < 10)){
+                else if ((row >= 10) && (col < 10)) {
                     outputFile << row << "0" << col;
                 }
                 else if ((row < 10) && (col >= 10)) {
                     outputFile << "0" << row << col;
                 }
-                else{
+                else {
                     outputFile << "0" << row << "0" << col;
                 }
             }
@@ -64,8 +64,8 @@ void polybius_decrypt(string inputFileFileName, string outputFileFileName)
     string line;
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
-            if ((line[i]-'0'>=0) && (line[i] - '0' <= 9) && (line[i+1]!=0) && (line[i + 2] != 0) && (line[i + 3] != 0) && (line[i+1] - '0' >= 0) && (line[i+1] - '0' <= 9) &&(line[i + 2] - '0' >= 0) && (line[i + 2] - '0' <= 9) && (line[i + 3] - '0' >= 0) && (line[i + 3] - '0' <= 9)) {
-                int row = (line[i]-'0') * 10 + (line[i + 1]-'0');
+            if ((line[i] - '0' >= 0) && (line[i] - '0' <= 9) && (line[i + 1] != 0) && (line[i + 2] != 0) && (line[i + 3] != 0) && (line[i + 1] - '0' >= 0) && (line[i + 1] - '0' <= 9) && (line[i + 2] - '0' >= 0) && (line[i + 2] - '0' <= 9) && (line[i + 3] - '0' >= 0) && (line[i + 3] - '0' <= 9)) {
+                int row = (line[i] - '0') * 10 + (line[i + 1] - '0');
                 int col = (line[i + 2] - '0') * 10 + (line[i + 3] - '0');
                 outputFile << TABLE[row][col];
                 i += 3;
