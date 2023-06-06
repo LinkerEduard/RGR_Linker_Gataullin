@@ -50,7 +50,7 @@ jump:
     std::cin >> temp_diameter;
     for (int i = 0; i < temp_diameter.length(); ++i) {
         if (!((temp_diameter[i] - '0' >= 0) && (temp_diameter[i] - '0' <= 9))) {
-            std::cout << "Error, please enter diameter >=1!" << std::endl;  goto jump;
+            std::cout << "Error, please enter only numbers!" << std::endl;  goto jump;
         }
         diameter = diameter * 10 + (temp_diameter[i] - '0');
     }
