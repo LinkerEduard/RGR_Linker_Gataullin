@@ -7,9 +7,9 @@ void skital_encrypt(std::string inputFileFileName, std::string outputFileFileNam
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);
     std::string line;
-    jump:
-    std::string temp_diameter="";
-    int diameter=0;
+jump:
+    std::string temp_diameter = "";
+    int diameter = 0;
     std::cout << "Enter the diameter (enter the number >=1): " << std::endl;
     std::cin >> temp_diameter;
     for (int i = 0; i < temp_diameter.length(); ++i) {
@@ -40,7 +40,7 @@ void skital_decrypt(std::string inputFileFileName, std::string outputFileFileNam
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);
     std::string line;
-    jump:
+jump:
     std::string temp_diameter = "";
     int diameter = 0;
     std::cout << "Enter the diameter (enter the number >=1): " << std::endl;

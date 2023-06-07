@@ -12,7 +12,7 @@ void vigener_encrypt(string inputFileFileName, string outputFileFileName)
     string key1;
     string key2;
     string temp_key;
-    jump:
+jump:
     cout << "Enter the key in English (for English text) and in Russian (for Russian text)" << endl;
     getline(cin, temp_key);
 
@@ -33,14 +33,14 @@ void vigener_encrypt(string inputFileFileName, string outputFileFileName)
     if ((key1.length() == 0) && (key2.length() == 0)) { cout << "Error" << endl; goto jump; }
 
     int keyIndex = 0;
-    unsigned char part_key_eng=' ', part_key_rus=' ';
+    unsigned char part_key_eng = ' ', part_key_rus = ' ';
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
             unsigned char letter = line[i];
             if ((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z') || (letter >= int(unsigned char('À')) && letter <= int(unsigned char('ß'))) || (letter >= int(unsigned char('à')) && letter <= int(unsigned char('ÿ')))) {
-                if(key1.length() != 0){ part_key_eng = key1[keyIndex % key1.length()]; }
-                if(key2.length() != 0){ part_key_rus = key2[keyIndex % key2.length()]; }
-                
+                if (key1.length() != 0) { part_key_eng = key1[keyIndex % key1.length()]; }
+                if (key2.length() != 0) { part_key_rus = key2[keyIndex % key2.length()]; }
+
                 if (key1.length() != 0) {
                     if (part_key_eng >= 'a' && part_key_eng <= 'z') {
                         part_key_eng -= 'a';
@@ -84,7 +84,7 @@ void vigener_encrypt(string inputFileFileName, string outputFileFileName)
                 outputFile << letter;
                 keyIndex++;
             }
-            else{ outputFile << letter; }
+            else { outputFile << letter; }
         }
         outputFile << endl;
     }
@@ -101,7 +101,7 @@ void vigener_decrypt(string inputFileFileName, string outputFileFileName)
     string key1;
     string key2;
     string temp_key;
-    jump:
+jump:
     cout << "Enter the key in English (for English text) and in Russian (for Russian text)" << endl;
     getline(cin, temp_key);
 
@@ -122,7 +122,7 @@ void vigener_decrypt(string inputFileFileName, string outputFileFileName)
     if ((key1.length() == 0) && ((key2.length() == 0))) { cout << "Error" << endl; goto jump; }
 
     int keyIndex = 0;
-    unsigned char part_key_eng=' ', part_key_rus=' ';
+    unsigned char part_key_eng = ' ', part_key_rus = ' ';
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
             unsigned char letter = line[i];

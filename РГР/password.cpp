@@ -5,7 +5,7 @@
 #include "rsa.h"
 #include "gro.h"
 using namespace std;
-void check_numbers(long long& p, long long& q)
+void check_numbers(int64_t& p, int64_t& q)
 {
     while (!is_prime(p) || !is_prime(q) || !can_encrypt1(p, q) || !is_different(p, q) || !can_encrypt2(p, q) || p <= 0 || q <= 0)
     {
@@ -145,27 +145,27 @@ string pass2_decrypt(string inputString)
     }
     return decrypted_pass;
 }
-string pass3_decrypt(string inputFileName, long long p, long long q)
+string pass3_decrypt(string inputFileName, int64_t p, int64_t q)
 {
     ifstream inputFile(inputFileName);
     string line;
     check_numbers(p, q);
-    long long n = p * q;
-    long long phi = (p - 1) * (q - 1);
-    long long e = calculate_e(phi);
-    long long d = calculate_d(e, phi);
+    int64_t n = p * q;
+    int64_t phi = (p - 1) * (q - 1);
+    int64_t e = calculate_e(phi);
+    int64_t d = calculate_d(e, phi);
     string decrypted_pass = "";
     string crypted_m_str;
     stringstream ss(line);
     while (getline(inputFile, line))
     {
         string crypted_m_str;
-        long long crypted_m;
+        int64_t crypted_m;
         stringstream ss(line);
         while (getline(ss, crypted_m_str, ' '))
         {
             crypted_m = stoull(crypted_m_str);
-            long long m = fast_pow(crypted_m, d, n);
+            int64_t m = fast_pow(crypted_m, d, n);
             char symbol = (char)m;
             decrypted_pass += symbol;
         }
@@ -173,7 +173,7 @@ string pass3_decrypt(string inputFileName, long long p, long long q)
     inputFile.close();
     return decrypted_pass;
 }
-string get_password(string key, long long p, long long q) {
+string get_password(string key, int64_t p, int64_t q) {
     string inputFileName = "password.txt";
     if (key == "" || p <= 0 || q <= 0)
         return "Invalid";
