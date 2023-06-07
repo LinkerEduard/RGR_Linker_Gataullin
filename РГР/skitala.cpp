@@ -7,19 +7,17 @@ void skital_encrypt(std::string inputFileFileName, std::string outputFileFileNam
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);
     std::string line;
-jump:
-    std::string temp_diameter = "";
-    int diameter = 0;
-
-    std::cout << "Enter the diameter (enter an integer >0) of the cylinder: " << std::endl;
+    jump:
+    std::string temp_diameter="";
+    int diameter=0;
+    std::cout << "Enter the diameter (enter the number >=1): " << std::endl;
     std::cin >> temp_diameter;
     for (int i = 0; i < temp_diameter.length(); ++i) {
-        if (!((temp_diameter[i] - '0' >= 0) && (temp_diameter[i] - '0' <= 9))) {
-            std::cout << "Error, please enter only numbers!" << std::endl;  goto jump;
+        if ((temp_diameter[i] - '0' >= 0) && (temp_diameter[i] - '0' <= 9)) {
+            diameter = diameter * 10 + (temp_diameter[i] - '0');
         }
-        diameter = diameter * 10 + (temp_diameter[i] - '0');
     }
-    if (diameter < 1) { std::cout << "Error, please enter diameter >=1!" << std::endl;  goto jump; }
+    if (diameter < 1) { std::cout << "Error, please enter the number >=1!" << std::endl;  goto jump; }
 
     getline(std::cin, line);
     while (getline(inputFile, line)) {
@@ -42,19 +40,17 @@ void skital_decrypt(std::string inputFileFileName, std::string outputFileFileNam
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);
     std::string line;
-jump:
+    jump:
     std::string temp_diameter = "";
     int diameter = 0;
-
-    std::cout << "Enter the diameter (enter an integer >0) of the cylinder: " << std::endl;
+    std::cout << "Enter the diameter (enter the number >=1): " << std::endl;
     std::cin >> temp_diameter;
     for (int i = 0; i < temp_diameter.length(); ++i) {
-        if (!((temp_diameter[i] - '0' >= 0) && (temp_diameter[i] - '0' <= 9))) {
-            std::cout << "Error, please enter only numbers!" << std::endl;  goto jump;
+        if ((temp_diameter[i] - '0' >= 0) && (temp_diameter[i] - '0' <= 9)) {
+            diameter = diameter * 10 + (temp_diameter[i] - '0');
         }
-        diameter = diameter * 10 + (temp_diameter[i] - '0');
     }
-    if (diameter < 1) { std::cout << "Error, please enter diameter >=1!" << std::endl;  goto jump; }
+    if (diameter < 1) { std::cout << "Error, please enter the number >=1!" << std::endl;  goto jump; }
 
     getline(std::cin, line);
     while (getline(inputFile, line)) {
