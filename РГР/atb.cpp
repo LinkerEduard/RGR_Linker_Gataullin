@@ -6,7 +6,7 @@ using namespace std;
 void changeatb(int& asciiCode)
 {
     int temp = 0;
-    if (asciiCode >= 65 && asciiCode <= 122) {
+    if ((asciiCode >= 65 && asciiCode <= 90) || (asciiCode >= 97 && asciiCode <= 122)) {
         if (asciiCode < 97) temp = 32;
         asciiCode = 122 - (asciiCode + temp - 97);
         asciiCode -= temp;
