@@ -11,7 +11,7 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     string pas, password, key;
-    long long p, q;
+    int64_t  p, q;
     do {
         cout << "Enter password (0 - Exit): ";
         getline(cin, pas);
@@ -26,19 +26,22 @@ int main()
     } while (password != get_password(key, p, q));
     if (password == get_password(key, p, q)) {
         cout << "Welcome!" << endl;
-        string mode;
+        string mode_2;
         cout << "Choose mode (0 - Exit, 1 - Manual input, 2 - Encrypt file, 3 - Decrypt file): ";
-        getline(cin, mode);
+        getline(cin, mode_2);
 
-        while (mode != "0") {
-            if (mode == "1") {
+        while (mode_2 != "0") {
+            if (mode_2 == "1") {
                 cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
                 string choice;
                 getline(cin, choice);
-                while (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
-                    cout << "Invalid choice" << endl;
-                    cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
-                    getline(cin, choice);
+                try {
+                    if (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
+                        throw "Invalid choice";
+                }
+                catch (const char* msg) {
+                    cout << msg << endl;
+                    continue;
                 }
                 if (choice != "0") {
                     string inputFileName = "input.txt";
@@ -97,14 +100,17 @@ int main()
                     }
                 }
             }
-            else if (mode == "2") {
+            else if (mode_2 == "2") {
                 cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
                 string choice;
                 getline(cin, choice);
-                while (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
-                    cout << "Invalid choice" << endl;
-                    cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
-                    getline(cin, choice);
+                try {
+                    if (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
+                        throw "Invalid choice";
+                }
+                catch (const char* msg) {
+                    cout << msg << endl;
+                    continue;
                 }
                 if (choice != "0") {
                     string inputFileName, outputFileName;
@@ -140,14 +146,17 @@ int main()
                     cout << "File is encrypted!" << endl;
                 }
             }
-            else if (mode == "3") {
+            else if (mode_2 == "3") {
                 cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
                 string choice;
                 getline(cin, choice);
-                while (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
-                    cout << "Invalid choice" << endl;
-                    cout << "Enter valid choice (0 - Back, 1 - Atbash Method, 2 - Gronsfeld Method, 3 - RSA Method, 4-Skitala Method, 5-Vigener Method, 6-Polybius Method): ";
-                    getline(cin, choice);
+                try {
+                    if (choice != "0" && choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
+                        throw "Invalid choice";
+                }
+                catch (const char* msg) {
+                    cout << msg << endl;
+                    continue;
                 }
                 if (choice != "0") {
                     string inputFileName, outputFileName;
@@ -188,7 +197,7 @@ int main()
             }
 
             cout << "Choose mode (0 - Exit, 1 - Manual input, 2 - Encrypt file, 3 - Decrypt file): ";
-            getline(cin, mode);
+            getline(cin, mode_2);
         }
     }
     cout << "Exiting program";

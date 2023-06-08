@@ -1,16 +1,16 @@
 ﻿  password.cpp
-C:\Users\Ms_Hlopets\Desktop\Project3\password.cpp(38,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Ms_Hlopets\Desktop\РГР\password.cpp(38,33): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   atb.cpp
   rsa.cpp
   main.cpp
   cipher.cpp
   gro.cpp
-C:\Users\Ms_Hlopets\Desktop\Project3\gro.cpp(19,41): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Ms_Hlopets\Desktop\Project3\gro.cpp(115,41): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Ms_Hlopets\Desktop\РГР\gro.cpp(19,41): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Ms_Hlopets\Desktop\РГР\gro.cpp(115,41): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   skitala.cpp
-C:\Users\Ms_Hlopets\Desktop\Project3\skitala.cpp(27,39): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Ms_Hlopets\Desktop\Project3\skitala.cpp(62,39): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Ms_Hlopets\Desktop\РГР\skitala.cpp(25,39): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Ms_Hlopets\Desktop\РГР\skitala.cpp(58,39): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   polybius.cpp
   vigener.cpp
   Создание кода...
-  Project3.vcxproj -> C:\Users\Ms_Hlopets\Desktop\Project3\x64\Debug\MDTFCipher.exe
+  Project3.vcxproj -> C:\Users\Ms_Hlopets\Desktop\РГР\x64\Debug\MDTFCipher.exe
