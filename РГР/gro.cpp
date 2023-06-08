@@ -6,9 +6,27 @@ bool checkIfNumeric(string str)
 {
     return !str.empty() && str.find_first_not_of("0123456789") == std::string::npos;
 }
+void changegro(int& asciiCode, wchar_t symbol) {
+    int temp = 0;
+    if ((symbol >= 65 && symbol <= 90) || (symbol >= 97 && symbol <= 122)) {
+        if (symbol < 97) temp = 32;
+        asciiCode += temp;
+        if (asciiCode > 122) asciiCode -= 26;
+        if (asciiCode < 97) asciiCode += 26;
+        asciiCode -= temp;
+    }
+    else if (symbol >= 192 && symbol <= 255) {
+        if (symbol < 224) temp = 32;
+        asciiCode += temp;
+        if (asciiCode > 255) asciiCode -= 32;
+        if (asciiCode < 224) asciiCode += 32;
+        asciiCode -= temp;
+    }
+    else asciiCode = int(symbol);
+}
 void gro_encrypt(string inputFileName, string outputFileName) {
-    wifstream input(inputFileName);
-    wofstream output(outputFileName);
+    wifstream inputFile(inputFileName);
+    wofstream outputFile(outputFileName);
     string key;
     do {
         cout << "Enter key: ";
@@ -23,88 +41,28 @@ void gro_encrypt(string inputFileName, string outputFileName) {
                 keyArray[i] = key[i] - '0';
             }
             wstring line;
-            while (getline(input, line)) {
+            while (getline(inputFile, line)) {
                 for (int i = 0; i < line.length(); i++) {
-                    wchar_t symbol = line[i]; if (symbol == ' ') {
-                        output << " ";
+                    wchar_t symbol = line[i]; 
+                    if (symbol == ' ') {
+                        outputFile << " ";
                         continue;
                     }
-                    int asciiCode = (int)symbol + keyArray[i % keyLength];
-                   
-                    if (symbol < 0)
-                    {
-                        output << symbol;
-                    }
-                    else if ((symbol >= 192 && symbol <= 255) || (symbol >= 65 && symbol <= 90) || (symbol >= 97 && symbol <= 122))
-                    {
-                    if ((symbol >= 192) && (symbol <= 223))
-                    {
-                        if (asciiCode > 223)
-                        {
-                            asciiCode -= 32;
-                        }
-                        else if (asciiCode < 192)
-                        {
-                   
-                            asciiCode += 32;
-                        }
-                    }
-                    else if ((symbol >= 224) && (symbol <= 255))
-                    {
-                        if (asciiCode > 255)
-                        {
-                            asciiCode -= 32;
-                        }
-                        else if (asciiCode < 224)
-                        {
-                            asciiCode += 32;
-                        }
-                    }
-                    else if ((symbol >= 97) && (symbol <= 122))
-                    {
-                        if (asciiCode > 122)
-                        {
-                            asciiCode -= 26;
-                        }
-                        else if (asciiCode < 97)
-                        {
-                            asciiCode += 26;
-                        }
-                    }
-                    else if ((symbol >= 65) && (symbol <= 90))
-                    {
-                        if (asciiCode > 90)
-                        {
-                            asciiCode -= 26;
-                        }
-                        else if (asciiCode < 65)
-                        {
-                            asciiCode += 26;
-                        }
-                    }
-                    else
-                    {
-                        output << symbol;
-                    }
-                    output << (wchar_t)asciiCode;
-                }
-                    else
-                    {
-                    output << symbol;
-                    }
+                    int asciiCode = (int)symbol + keyArray[i % keyLength];    
+                    changegro(asciiCode, symbol);
+                    outputFile << (wchar_t)asciiCode;
             }
-                output << endl;
+                outputFile << endl;
             }
-
-            input.close();
-            output.close();
+            inputFile.close();
+            outputFile.close();
             delete[] keyArray;
         }
     } while (!(checkIfNumeric(key)));
 }
 void gro_decrypt(string inputFileName, string outputFileName) {
-    wifstream input(inputFileName);
-    wofstream output(outputFileName);
+    wifstream inputFile(inputFileName);
+    wofstream outputFile(outputFileName);
     string key;
     do {
         cout << "Enter key: ";
@@ -119,78 +77,24 @@ void gro_decrypt(string inputFileName, string outputFileName) {
                 keyArray[i] = key[i] - '0';
             }
             wstring line;
-            while (getline(input, line))
+            while (getline(inputFile, line))
             {
                 for (int i = 0; i < line.length(); i++)
                 {
                     wchar_t symbol = line[i];
                     if (symbol == ' ')
                     {
-                        output << " ";
+                        outputFile << " ";
                         continue;
                     }
                     int asciiCode = (int)symbol - keyArray[i % keyLength];
-                    if (symbol < 0)
-                    {
-                        output << symbol;
-                    }
-                    else if ((symbol >= 192 && symbol <= 255) || (symbol >= 65 && symbol <= 90) || (symbol >= 97 && symbol <= 122))
-                    {
-                    if ((symbol >= 192) && (symbol <= 223))
-                    {
-                        if (asciiCode > 223)
-                        {
-                            asciiCode -= 32;
-                        }
-                        else if (asciiCode < 192)
-                        {
-                            asciiCode += 32;
-                        }
-                    }
-                    else if ((symbol >= 224) && (symbol <= 255))
-                    {
-                        if (asciiCode > 255)
-                        {
-                            asciiCode -= 32;
-                        }
-                        else if (asciiCode < 224)
-                        {
-                            asciiCode += 32;
-                        }
-                    }
-                    else if ((symbol >= 97) && (symbol <= 122))
-                    {
-                        if (asciiCode > 122)
-                        {
-                            asciiCode -= 26;
-                        }
-                        else if (asciiCode < 97)
-                        {
-                            asciiCode += 26;
-                        }
-                    }
-                    else if ((symbol >= 65) && (symbol <= 90))
-                    {
-                        if (asciiCode > 90)
-                        {
-                            asciiCode -= 26;
-                        }
-                        else if (asciiCode < 65)
-                        {
-                            asciiCode += 26;
-                        }
-                    }
-                    output << (wchar_t)asciiCode;
-                    }
-                    else
-                    {
-                        output << symbol;
-                    }
+                    changegro(asciiCode, symbol);
+                    outputFile << (wchar_t)asciiCode;
                 }
-                output << endl;
+                outputFile << endl;
             }
-            input.close();
-            output.close();
+            inputFile.close();
+            outputFile.close();
             delete[] keyArray;
         }
     } while (!(checkIfNumeric(key)));
