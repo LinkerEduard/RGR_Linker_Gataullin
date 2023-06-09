@@ -5,7 +5,6 @@ void polybius_encrypt(string& inputFileFileName, string& outputFileFileName)
     ifstream inputFile(inputFileFileName);
     ofstream outputFile(outputFileFileName);
     string line;
-    setlocale(LC_ALL, "Russian");
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
             int code_ascii = static_cast<unsigned char>(line[i]);
@@ -24,7 +23,6 @@ void polybius_decrypt(string& inputFileFileName, string& outputFileFileName)
     ofstream outputFile(outputFileFileName);
     string line;
     int code_ascii;
-    setlocale(LC_ALL, "Russian");
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
             if ((line[i] - '0' >= 0) && (line[i] - '0' <= 9) && (line[i + 1] - '0' >= 0) && (line[i + 1] - '0' <= 9) && (line[i + 2] - '0' >= 0) && (line[i + 2] - '0' <= 9) && (line[i + 3] - '0' >= 0) && (line[i + 3] - '0' <= 9)) {

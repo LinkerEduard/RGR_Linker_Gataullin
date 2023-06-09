@@ -94,7 +94,6 @@ void func_enc_dec(ifstream& inputFile, ofstream& outputFile, string& key1, strin
 }
 void vigener_encrypt(string& inputFileFileName, string& outputFileFileName)
 {
-    setlocale(LC_ALL, "Russian");
     ifstream inputFile(inputFileFileName);
     ofstream outputFile(outputFileFileName);
     string key1, key2, temp_key;
@@ -109,7 +108,6 @@ void vigener_encrypt(string& inputFileFileName, string& outputFileFileName)
 
 void vigener_decrypt(string& inputFileFileName, string& outputFileFileName)
 {
-    setlocale(LC_ALL, "Russian");
     ifstream inputFile(inputFileFileName);
     ofstream outputFile(outputFileFileName);
     string key1, key2, temp_key;
