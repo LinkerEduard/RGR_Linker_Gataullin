@@ -45,22 +45,5 @@ void atb_encrypt(string inputFileFileName, string outputFileFileName)
 
 void atb_decrypt(string inputFileFileName, string outputFileFileName)
 {
-    wifstream inputFile(inputFileFileName);
-    wofstream outputFile(outputFileFileName);
-    wstring line;
-    while (getline(inputFile, line)) {
-        for (int i = 0; i < line.length(); i++) {
-            wchar_t symbol = line[i];
-            if (symbol == ' ') {
-                outputFile << " ";
-                continue;
-            }
-            int asciiCode = (int)symbol;
-            changeatb(asciiCode);
-            outputFile << (wchar_t)asciiCode;
-        }
-        outputFile << endl;
-    }
-    inputFile.close();
-    outputFile.close();
+    atb_encrypt(inputFileFileName, outputFileFileName);
 }

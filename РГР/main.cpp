@@ -11,7 +11,7 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     string pas, password, key;
-    int64_t  p, q;
+    int_fast64_t  p, q;
     do {
         cout << "Enter password (0 - Exit): ";
         getline(cin, pas);
