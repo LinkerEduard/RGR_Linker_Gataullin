@@ -6,7 +6,7 @@
 #include "gro.h"
 #include "atb.h"
 using namespace std;
-void check_numbers(int_fast64_t& p, int_fast64_t& q)
+void check_numbers(uint_fast64_t& p, uint_fast64_t& q)
 {
         if (p <= 0 || q <= 0) {
             p = 17;
@@ -73,27 +73,27 @@ string pass2_decrypt(string inputString)
     }
     return decrypted_pass;
 }
-string pass3_decrypt(string inputFileName, int_fast64_t p, int_fast64_t q)
+string pass3_decrypt(string inputFileName, uint_fast64_t p, uint_fast64_t q)
 {
     ifstream inputFile(inputFileName);
     string line;
     check_numbers(p, q);
-    int_fast64_t n = p * q;
-    int_fast64_t phi = (p - 1) * (q - 1);
-    int_fast64_t e = calculate_e(phi);
-    int_fast64_t d = calculate_d(e, phi);
+    uint_fast64_t n = p * q;
+    uint_fast64_t phi = (p - 1) * (q - 1);
+    uint_fast64_t e = calculate_e(phi);
+    uint_fast64_t d = calculate_d(e, phi);
     string decrypted_pass = "";
     string crypted_m_str;
     stringstream ss(line);
     while (getline(inputFile, line))
     {
         string crypted_m_str;
-        int_fast64_t crypted_m;
+        uint_fast64_t crypted_m;
         stringstream ss(line);
         while (getline(ss, crypted_m_str, ' '))
         {
             crypted_m = stoull(crypted_m_str);
-            int_fast64_t m = fast_pow(crypted_m, d, n);
+            uint_fast64_t m = fast_pow(crypted_m, d, n);
             char symbol = (char)m;
             decrypted_pass += symbol;
         }
@@ -101,7 +101,7 @@ string pass3_decrypt(string inputFileName, int_fast64_t p, int_fast64_t q)
     inputFile.close();
     return decrypted_pass;
 }
-string get_password(string key, int_fast64_t p, int_fast64_t q) {
+string get_password(string key, uint_fast64_t p, uint_fast64_t q) {
     string inputFileName = "password.txt";
     if (key == "" || p <= 0 || q <= 0)
         return "Invalid";

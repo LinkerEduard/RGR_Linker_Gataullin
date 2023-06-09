@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void vigener_encrypt(string inputFileFileName, string outputFileFileName);
-void vigener_decrypt(string inputFileFileName, string outputFileFileName);
+void vigener_encrypt(string& inputFileFileName, string& outputFileFileName);
+void vigener_decrypt(string& inputFileFileName, string& outputFileFileName);
 
 #endif

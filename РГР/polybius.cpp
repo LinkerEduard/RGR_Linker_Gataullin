@@ -1,6 +1,6 @@
 #include "polybius.h"
 
-void polybius_encrypt(string inputFileFileName, string outputFileFileName)
+void polybius_encrypt(string& inputFileFileName, string& outputFileFileName)
 {
     ifstream inputFile(inputFileFileName);
     ofstream outputFile(outputFileFileName);
@@ -18,7 +18,7 @@ void polybius_encrypt(string inputFileFileName, string outputFileFileName)
     outputFile.close();
 }
 
-void polybius_decrypt(string inputFileFileName, string outputFileFileName)
+void polybius_decrypt(string& inputFileFileName, string& outputFileFileName)
 {
     ifstream inputFile(inputFileFileName);
     ofstream outputFile(outputFileFileName);

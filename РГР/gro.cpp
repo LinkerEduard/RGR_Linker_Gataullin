@@ -24,7 +24,7 @@ void changegro(int& asciiCode, wchar_t symbol) {
     }
     else asciiCode = int(symbol);
 }
-void gro_universal(string inputFileName, string outputFileName, int temp) {
+void gro_universal(string& inputFileName, string& outputFileName, int temp) {
     wifstream inputFile(inputFileName);
     wofstream outputFile(outputFileName);
     string key;
@@ -63,9 +63,9 @@ void gro_universal(string inputFileName, string outputFileName, int temp) {
         }
     } while (!(checkIfNumeric(key)));
 }
-void gro_encrypt(string inputFileName, string outputFileName) {
+void gro_encrypt(string& inputFileName, string& outputFileName) {
     gro_universal(inputFileName, outputFileName, 1);
 }
-void gro_decrypt(string inputFileName, string outputFileName) {
+void gro_decrypt(string& inputFileName, string& outputFileName) {
     gro_universal(inputFileName, outputFileName, -1);
 }

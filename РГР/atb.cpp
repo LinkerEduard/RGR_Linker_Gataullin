@@ -20,7 +20,7 @@ void changeatb(int& asciiCode)
         asciiCode = 57 - (asciiCode - 48);
     }
 }
-void atb_encrypt(string inputFileFileName, string outputFileFileName)
+void atb_encrypt(string& inputFileFileName, string& outputFileFileName)
 {
     wifstream inputFile(inputFileFileName);
     wofstream outputFile(outputFileFileName);
@@ -43,7 +43,7 @@ void atb_encrypt(string inputFileFileName, string outputFileFileName)
 }
 
 
-void atb_decrypt(string inputFileFileName, string outputFileFileName)
+void atb_decrypt(string& inputFileFileName, string& outputFileFileName)
 {
     atb_encrypt(inputFileFileName, outputFileFileName);
 }

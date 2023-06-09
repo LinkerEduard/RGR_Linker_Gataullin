@@ -2,7 +2,7 @@
 #include <limits>
 #include <iostream>
 
-void skital_encrypt(std::string inputFileFileName, std::string outputFileFileName)
+void skital_encrypt(std::string& inputFileFileName, std::string& outputFileFileName)
 {
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);
@@ -35,7 +35,7 @@ jump:
     outputFile.close();
 }
 
-void skital_decrypt(std::string inputFileFileName, std::string outputFileFileName)
+void skital_decrypt(std::string& inputFileFileName, std::string& outputFileFileName)
 {
     std::ifstream inputFile(inputFileFileName);
     std::ofstream outputFile(outputFileFileName);

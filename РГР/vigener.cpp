@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
@@ -10,10 +10,10 @@ void key(string& temp_key, string& key1, string& key2){
         else if (temp_key[i] >= 'A' && temp_key[i] <= 'Z') {
             key1 += temp_key[i];
         }
-        else if (temp_key[i] >= 'à' && temp_key[i] <= 'ÿ') {
+        else if (temp_key[i] >= 'Ğ°' && temp_key[i] <= 'Ñ') {
             key2 += temp_key[i];
         }
-        else if (temp_key[i] >= 'À' && temp_key[i] <= 'ß') {
+        else if (temp_key[i] >= 'Ğ' && temp_key[i] <= 'Ğ¯') {
             key2 += temp_key[i];
         }
     }
@@ -26,7 +26,7 @@ void func_enc_dec(ifstream& inputFile, ofstream& outputFile, string& key1, strin
     while (getline(inputFile, line)) {
         for (size_t i = 0; i < line.length(); ++i) {
             unsigned char letter = line[i];
-            if ((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z') || (letter >= int(unsigned char('À')) && letter <= int(unsigned char('ß'))) || (letter >= int(unsigned char('à')) && letter <= int(unsigned char('ÿ')))) {
+            if ((letter >= 'A' && letter <= 'Z') || (letter >= 'a' && letter <= 'z') || (letter >= int(unsigned char('Ğ')) && letter <= int(unsigned char('Ğ¯'))) || (letter >= int(unsigned char('Ğ°')) && letter <= int(unsigned char('Ñ')))) {
                 if (key1.length() != 0) { part_key_eng = key1[keyIndex % key1.length()]; }
                 if (key2.length() != 0) { part_key_rus = key2[keyIndex % key2.length()]; }
 
@@ -39,11 +39,11 @@ void func_enc_dec(ifstream& inputFile, ofstream& outputFile, string& key1, strin
                     }
                 }
                 if (key2.length() != 0) {
-                    if (part_key_rus >= int(unsigned char('à')) && part_key_rus <= int(unsigned char('ÿ'))) {
-                        part_key_rus -= int(unsigned char('à'));
+                    if (part_key_rus >= int(unsigned char('Ğ°')) && part_key_rus <= int(unsigned char('Ñ'))) {
+                        part_key_rus -= int(unsigned char('Ğ°'));
                     }
-                    else if (part_key_rus >= int(unsigned char('À')) && part_key_rus <= int(unsigned char('ß'))) {
-                        part_key_rus -= int(unsigned char('À'));
+                    else if (part_key_rus >= int(unsigned char('Ğ')) && part_key_rus <= int(unsigned char('Ğ¯'))) {
+                        part_key_rus -= int(unsigned char('Ğ'));
                     }
                 }
                 if (key1.length() != 0) {
@@ -65,21 +65,21 @@ void func_enc_dec(ifstream& inputFile, ofstream& outputFile, string& key1, strin
                     }
                 }
                 if (key2.length() != 0) {
-                    if (letter >= int(unsigned char('À')) && letter <= int(unsigned char('ß'))) {
-                        letter -= int(unsigned char('À'));
+                    if (letter >= int(unsigned char('Ğ')) && letter <= int(unsigned char('Ğ¯'))) {
+                        letter -= int(unsigned char('Ğ'));
                         if (enc_dec == 1) {
                             letter = (letter + part_key_rus) % 32;
                         }
                         else { letter = (letter - part_key_rus + 32) % 32; }
-                        letter += int(unsigned char('À'));
+                        letter += int(unsigned char('Ğ'));
                     }
-                    else if (letter >= int(unsigned char('à')) && letter <= int(unsigned char('ÿ'))) {
-                        letter -= int(unsigned char('à'));
+                    else if (letter >= int(unsigned char('Ğ°')) && letter <= int(unsigned char('Ñ'))) {
+                        letter -= int(unsigned char('Ğ°'));
                         if (enc_dec == 1) {
                             letter = (letter + part_key_rus) % 32;
                         }
                         else { letter = (letter - part_key_rus + 32) % 32; }
-                        letter += int(unsigned char('à'));
+                        letter += int(unsigned char('Ğ°'));
                     }
                 }
                 outputFile << letter;
@@ -92,7 +92,7 @@ void func_enc_dec(ifstream& inputFile, ofstream& outputFile, string& key1, strin
     inputFile.close();
     outputFile.close();
 }
-void vigener_encrypt(string inputFileFileName, string outputFileFileName)
+void vigener_encrypt(string& inputFileFileName, string& outputFileFileName)
 {
     setlocale(LC_ALL, "Russian");
     ifstream inputFile(inputFileFileName);
@@ -107,7 +107,7 @@ void vigener_encrypt(string inputFileFileName, string outputFileFileName)
     func_enc_dec(inputFile, outputFile, key1, key2, enc_dec);
 }
 
-void vigener_decrypt(string inputFileFileName, string outputFileFileName)
+void vigener_decrypt(string& inputFileFileName, string& outputFileFileName)
 {
     setlocale(LC_ALL, "Russian");
     ifstream inputFile(inputFileFileName);

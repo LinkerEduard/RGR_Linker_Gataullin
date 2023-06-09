@@ -11,105 +11,96 @@ bool checkIfNumericRSA(string str)
     else
         return false;
 }
-int_fast64_t  calculate_gcd(int_fast64_t  p, int_fast64_t  q)
+uint_fast64_t  calculate_gcd(uint_fast64_t  p, uint_fast64_t  q)
 {
     if (q == 0)
         return p;
     else
         return calculate_gcd(q, p % q);
 }
-
-int_fast64_t  calculate_e(int_fast64_t  phi)
+uint_fast64_t  calculate_e(uint_fast64_t  phi)
 {
-    int_fast64_t  e = 2;
+    uint_fast64_t  e = 2;
     while (e < phi && calculate_gcd(e, phi) != 1)
     {
         e++;
     }
     return e;
 }
-
-int_fast64_t  calculate_d(int_fast64_t  e, int_fast64_t  phi)
+uint_fast64_t  calculate_d(uint_fast64_t  e, uint_fast64_t  phi)
 {
-    int_fast64_t  d = 1;
+    uint_fast64_t  d = 1;
     while ((d * e) % phi != 1)
     {
         d++;
     }
     return d;
 }
-
-bool is_prime(int_fast64_t  num)
+bool is_prime(uint_fast64_t  num)
 {
     if (num == 1)
         return false;
 
-    for (int_fast64_t  i = 2; i <= sqrt(num); i++)
+    for (uint_fast64_t  i = 2; i <= sqrt(num); i++)
     {
         if (num % i == 0)
             return false;
     }
-
     return true;
 }
-
-bool can_encrypt1(int_fast64_t  p, int_fast64_t  q)
+bool can_encrypt1(uint_fast64_t  p, uint_fast64_t  q)
 {
     if ((p-1) * (q-1) >= 255)
         return true;
     else
         return false;
 }
-
-bool is_different(int_fast64_t  p, int_fast64_t  q)
+bool is_different(uint_fast64_t  p, uint_fast64_t  q)
 {
     if (p != q)
         return true;
     else
         return false;
 }
-
-bool can_encrypt2(int_fast64_t  p, int_fast64_t  q)
+bool can_encrypt2(uint_fast64_t  p, uint_fast64_t  q)
 {
-    if (p*q <= 3025550009)
+    if (p * q <= 3025550009)
         return true;
     else
         return false;
 }
-
-void get_primes(int_fast64_t & p, int_fast64_t & q)
+void get_primes(uint_fast64_t & p, uint_fast64_t & q)
 {
     string primes;
     cout << "Enter two different prime numbers separated by space: ";
-    jump:
+    Invalidinput :
     getline(cin, primes);
     stringstream ss(primes);
     ss >> p >> q;
         if (p <= 0 || q <= 0) {
             cout << "Invalid input. Please enter two different prime numbers separated by space: ";
-            goto jump;
+            goto Invalidinput;
         }
         if (!is_prime(p) || !is_prime(q)) {
             cout << "Invalid input. Please enter two different prime numbers separated by space: ";
-            goto jump;
+            goto Invalidinput;
         }
         if (!is_different(p, q)) {
             cout << "Invalid input. Please enter two different prime numbers separated by space: ";
-            goto jump;
+            goto Invalidinput;
         }
         if (!can_encrypt1(p, q)) {
             cout << "Invalid input. Please enter two prime larger numbers separated by space ((p-1)*(q-1)>254): ";
-            goto jump;
+            goto Invalidinput;
         }
         if (!can_encrypt2(p, q)) {
             cout << "Invalid input. Please enter two smaller prime numbers separated by space (p*q<3025550010): ";
-            goto jump;
+            goto Invalidinput;
         }
 }
-
-int_fast64_t  fast_pow(int_fast64_t  a, int_fast64_t  b, int_fast64_t  n)
+uint_fast64_t  fast_pow(uint_fast64_t  a, uint_fast64_t  b, uint_fast64_t  n)
 {
-    int_fast64_t  res = 1;
+    uint_fast64_t  res = 1;
     while (b > 0)
     {
         if (b & 1)
@@ -121,26 +112,25 @@ int_fast64_t  fast_pow(int_fast64_t  a, int_fast64_t  b, int_fast64_t  n)
     }
     return res;
 }
-
-void rsa_encrypt(std::string inputFileName, std::string outputFileName)
+void rsa_encrypt(string& inputFileName, string& outputFileName)
 {
     wifstream inputFile(inputFileName);
     wofstream outputFile(outputFileName);
     wstring line;
-    int_fast64_t  p, q;
+    uint_fast64_t  p, q;
     get_primes(p, q);
-    int_fast64_t  n = p * q;
-    int_fast64_t  phi = (p - 1) * (q - 1);
-    int_fast64_t  e = calculate_e(phi);
-    int_fast64_t  d = calculate_d(e, phi); 
+    uint_fast64_t  n = p * q;
+    uint_fast64_t  phi = (p - 1) * (q - 1);
+    uint_fast64_t  e = calculate_e(phi);
+    uint_fast64_t  d = calculate_d(e, phi); 
     cout << "Public key: " << e << " ; " << n << endl;
     cout << "Private key: " << d << " ; " << n << endl;
     while (getline(inputFile, line))
     {
         for (wchar_t& symbol : line)
         {
-            int_fast64_t  m = symbol;
-            int_fast64_t  crypted_m = fast_pow(m, e, n);
+            uint_fast64_t  m = symbol;
+            uint_fast64_t  crypted_m = fast_pow(m, e, n);
             outputFile << crypted_m << " ";
         }
         outputFile << "\n";
@@ -149,28 +139,27 @@ void rsa_encrypt(std::string inputFileName, std::string outputFileName)
     inputFile.close();
     outputFile.close();
 }
-
-void rsa_decrypt(std::string inputFileName, std::string outputFileName)
+void rsa_decrypt(string& inputFileName, string& outputFileName)
 {
     ifstream inputFile(inputFileName);
     ofstream outputFile(outputFileName);
     string line;
-    int_fast64_t  p, q;
+    uint_fast64_t  p, q;
     get_primes(p, q);
-    int_fast64_t  n = p * q;
-    int_fast64_t  phi = (p - 1) * (q - 1);
-    int_fast64_t  e = calculate_e(phi);
-    int_fast64_t  d = calculate_d(e, phi);
+    uint_fast64_t  n = p * q;
+    uint_fast64_t  phi = (p - 1) * (q - 1);
+    uint_fast64_t  e = calculate_e(phi);
+    uint_fast64_t  d = calculate_d(e, phi);
     while (getline(inputFile, line))
     {
         string crypted_m_str;
-        int_fast64_t  crypted_m;
+        uint_fast64_t  crypted_m;
         stringstream ss(line);
         while (getline(ss, crypted_m_str, ' '))
         {
             if (checkIfNumericRSA(crypted_m_str)) {
                 crypted_m = stoull(crypted_m_str);
-                int_fast64_t  m = fast_pow(crypted_m, d, n);
+                uint_fast64_t  m = fast_pow(crypted_m, d, n);
                 char symbol = (char)m;
                 outputFile << symbol;
             }
