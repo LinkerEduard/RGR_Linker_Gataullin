@@ -2,9 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <thread>
 #include <sstream>
-#include "cipher.h"
 #include "rsa.h"
 #include "atb.h"
 #include "gro.h"

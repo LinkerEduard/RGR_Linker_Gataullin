@@ -1,4 +1,6 @@
-#include "skitala.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 #include <limits>
 #include <iostream>
 

@@ -1,4 +1,7 @@
-#include "polybius.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
 
 void polybius_encrypt(string& inputFileFileName, string& outputFileFileName)
 {
